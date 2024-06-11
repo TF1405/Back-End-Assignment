@@ -1,4 +1,6 @@
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config()
 
 const midAuthenticator = function(req, res, next) {
 
@@ -13,7 +15,7 @@ const midAuthenticator = function(req, res, next) {
 
     //verifikasi token
     try {
-        const decoded = jwt.verify(token, "kode_rahasia");
+        const decoded = jwt.verify(token, process.env.ACCESS_TOKEN);
         req.user = decoded.user;
         next()
     }

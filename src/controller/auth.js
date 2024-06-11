@@ -3,8 +3,11 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { check, validationResult } from "express-validator";
 import db from "../db.js";
+import dotenv from "dotenv"
+dotenv.config()
 
 const router = express.Router()
+
 
 //Login user
 router.post(
@@ -42,7 +45,7 @@ router.post(
 
         jwt.sign(
             payload,
-            'kode_rahasia',
+            process.env.ACCESS_TOKEN,
             { expiresIn: 3600 },
             (err, token) => {
             if (err) throw err;
